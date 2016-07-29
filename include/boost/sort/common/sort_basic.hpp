@@ -238,7 +238,7 @@ inline void internal_sort (const range<Iter1_t> &rng1,
     range<Iter2_t> rng2_left(rng2.first, rng2.first + nelem), 
                    rng2_right(rng2.first + nelem, rng2.last);
 
-    if (nelem <= 32 and (level & 1) == even)
+    if (nelem <= 32u and bool(level & 1) == even)
     {
         insert_sort(rng1_left.first, rng1_left.last, comp);
         insert_sort(rng1_right.first, rng1_right.last, comp);

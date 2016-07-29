@@ -46,7 +46,7 @@ void test1 ( )
     V1.reserve (NMAX);
     for (uint32_t i = 0; i < 8; ++i) {
         for (uint32_t k = 0; k < NMAX; ++k) {
-            uint32_t NM = my_rand ( );
+            uint32_t NM = (uint32_t)my_rand ( );
             xk G;
             G.num = NM >> 3;
             G.tail = i;

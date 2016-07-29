@@ -22,6 +22,11 @@
 #include <type_traits>
 #include <vector>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4706) // assignment within conditional expression
+#endif
+
 namespace boost
 {
 namespace sort
@@ -267,4 +272,8 @@ void parallel_stable_sort(Iter_t first, Iter_t last, Compare comp)
 };//    End namespace boost
 //****************************************************************************
 //
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif

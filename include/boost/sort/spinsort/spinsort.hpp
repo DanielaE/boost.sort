@@ -27,6 +27,11 @@
 #include <vector>
 #include <cstddef>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4706) // assignment within conditional expression
+#endif
+
 namespace boost
 {
 namespace sort
@@ -124,7 +129,7 @@ static void insert_partial_sort (Iter1_t first, Iter1_t mid, Iter1_t last,
 
     // moving the elements
     viter.push_back(mid);
-    for (uint32_t i = viter.size() - 1; i != 0; --i)
+    for (uint32_t i = static_cast<uint32_t>(viter.size() - 1); i != 0; --i)
     {
         Iter1_t src = viter[i], limit = viter[i - 1];
         Iter1_t dest = src + (i);
@@ -561,4 +566,9 @@ inline void indirect_spinsort (Iter_t first, Iter_t last,
 };//    End namepspace boost
 //****************************************************************************
 //
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif
