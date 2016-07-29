@@ -103,7 +103,7 @@ struct merge_blocks
                 {
                     this->merge_range_pos (rng_input);
                 }
-                catch (std::bad_alloc &ba)
+                catch (std::bad_alloc &)
                 {
                     error = true;
                 };

@@ -67,7 +67,7 @@ void merge_level4(range<Iter1_t> dest, std::vector<range<Iter2_t> > &v_input,
         return;
     };
 
-    uint32_t nrange = v_input.size();
+    uint32_t nrange = static_cast<uint32_t>(v_input.size());
     uint32_t pos_ini = 0;
     while (pos_ini < v_input.size())
     {
@@ -114,7 +114,7 @@ void uninit_merge_level4(range<Value_t *> dest,
         return;
     };
 
-    uint32_t nrange = v_input.size();
+    uint32_t nrange = static_cast<uint32_t>(v_input.size());
     uint32_t pos_ini = 0;
     while (pos_ini < v_input.size())
     {
@@ -167,7 +167,7 @@ range<Iter2_t> merge_vector4(range<Iter1_t> range_input,
         return move_forward(range_output, v_input[0]);
     };
     bool sw = false;
-    uint32_t nrange = v_input.size();
+    uint32_t nrange = static_cast<uint32_t>(v_input.size());
 
     while (nrange > 1)
     {
@@ -175,13 +175,13 @@ range<Iter2_t> merge_vector4(range<Iter1_t> range_input,
         {
             merge_level4(range_input, v_output, v_input, comp);
             sw = false;
-            nrange = v_input.size();
+            nrange = static_cast<uint32_t>(v_input.size());
         }
         else
         {
             merge_level4(range_output, v_input, v_output, comp);
             sw = true;
-            nrange = v_output.size();
+            nrange = static_cast<uint32_t>(v_output.size());
         };
     };
     return (sw) ? v_output[0] : move_forward(range_output, v_input[0]);

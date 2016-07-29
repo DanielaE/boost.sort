@@ -52,47 +52,47 @@ std::vector<uint32_t> shuffled_16_values(size_t size, std::mt19937_64& rng) {
     return v;
 }
 
-std::vector<uint32_t> all_equal(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> all_equal(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
     for (uint32_t i = 0; i < size; ++i) v.push_back(0);
     return v;
 }
 
-std::vector<uint32_t> ascending(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> ascending(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
     for (uint32_t i = 0; i < size; ++i) v.push_back(i);
     return v;
 }
 
-std::vector<uint32_t> descending(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> descending(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
-    for (uint32_t i = size - 1; ; --i) {
+    for (uint32_t i = (uint32_t)size - 1; ; --i) {
         v.push_back(i);
         if (i == 0) break;
     }
     return v;
 }
 
-std::vector<uint32_t> pipe_organ(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> pipe_organ(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
-    for (uint32_t i = 0; i < size/2; ++i) v.push_back(i);
-    for (uint32_t i = size/2; i < size; ++i) v.push_back(size - i);
+    for (uint32_t i = 0; i < (uint32_t)size/2; ++i) v.push_back(i);
+    for (uint32_t i = (uint32_t)size/2; i < (uint32_t)size; ++i) v.push_back((uint32_t)size - i);
     return v;
 }
 
-std::vector<uint32_t> push_front(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> push_front(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
-    for (uint32_t i = 1; i < size; ++i) v.push_back(i);
+    for (uint32_t i = 1; i < (uint32_t)size; ++i) v.push_back(i);
     v.push_back(0);
     return v;
 }
 
-std::vector<uint32_t> push_middle(size_t size, std::mt19937_64& rng) {
+std::vector<uint32_t> push_middle(size_t size, std::mt19937_64&) {
     std::vector<uint32_t> v; v.reserve(size);
-    for (uint32_t i = 0; i < size; ++i) {
-        if (i != size/2) v.push_back(i);
+    for (uint32_t i = 0; i < (uint32_t)size; ++i) {
+        if (i != (uint32_t)size/2) v.push_back(i);
     }
-    v.push_back(size/2);
+    v.push_back((uint32_t)size/2);
     return v;
 }
 
