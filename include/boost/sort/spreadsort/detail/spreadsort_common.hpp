@@ -25,6 +25,11 @@ Phil Endecott and Frank Gennari
 #include <boost/sort/spreadsort/detail/constants.hpp>
 #include <boost/cstdint.hpp>
 
+#if defined(BOOST_MSVC)
+#pragma warning(push)
+#pragma warning(disable: 4127) // conditional expression is constant
+#endif
+
 namespace boost {
 namespace sort {
 namespace spreadsort {
@@ -120,5 +125,9 @@ namespace spreadsort {
 }
 }
 }
+
+#if defined(BOOST_MSVC)
+#pragma warning(pop)
+#endif
 
 #endif
