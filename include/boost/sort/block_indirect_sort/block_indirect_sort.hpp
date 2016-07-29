@@ -23,6 +23,11 @@
 #include <future>
 #include <iterator>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4706) // assignment within conditional expression
+#endif
+
 // This value is the minimal number of threads for to use the
 // block_indirect_sort algorithm
 #define BOOST_NTHREAD_BORDER 6
@@ -223,7 +228,7 @@ block_indirect_sort<Block_size, Group_size, Iter_t, Compare>
 
         uint32_t nbits_size = (nbits64(sizeof(value_t)) >> 1);
         if (nbits_size > 5) nbits_size = 5;
-        size_t max_per_thread = 1 << (18 - nbits_size);
+        size_t max_per_thread = 1ull << (18 - nbits_size);
 
         if (nelem < (max_per_thread) or nthread < 2)
         {
@@ -364,7 +369,7 @@ void block_indirect_sort<Block_size, Group_size, Iter_t, Compare>
     }
     else
     {
-        size_t level_thread = nbits64(nthread - 1) - 1;
+        uint32_t level_thread = nbits64(nthread - 1) - 1;
         split_range(0, bk.nblock, level_thread - 1);
         if (bk.error) return;
         move_blocks_t k(bk);
@@ -498,4 +503,8 @@ void block_indirect_sort (Iter_t first, Iter_t last, Compare comp,
 }; //    End namespace boost
 //****************************************************************************
 //
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif

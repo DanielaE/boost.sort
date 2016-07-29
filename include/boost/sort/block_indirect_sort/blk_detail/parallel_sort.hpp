@@ -18,6 +18,11 @@
 #include <boost/sort/pdqsort/pdqsort.hpp>
 #include <boost/sort/common/pivot.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4706) // assignment within conditional expression
+#endif
+
 namespace boost
 {
 namespace sort
@@ -88,10 +93,10 @@ struct parallel_sort
     /// @param error : global indicator of error.
     //------------------------------------------------------------------------
     void function_divide_sort(Iter_t first, Iter_t last, uint32_t level,
-                              atomic_t &counter, bool &error)
+                              atomic_t &counter_, bool &error)
     {
-        bscu::atomic_add(counter, 1);
-        function_t f1 = [this, first, last, level, &counter, &error]( )
+        bscu::atomic_add(counter_, 1);
+        function_t f1 = [this, first, last, level, &counter_, &error]( )
         {
             if (not error)
             {
@@ -104,7 +109,7 @@ struct parallel_sort
                     error = true;
                 };
             };
-            bscu::atomic_sub (counter, 1);
+            bscu::atomic_sub (counter_, 1);
         };
         bk.works.emplace_back(f1);
     };
@@ -159,7 +164,7 @@ parallel_sort<Block_size, Iter_t, Compare>
     //-------------------max_per_thread ---------------------------
     uint32_t nbits_size = (nbits64(sizeof(value_t))) >> 1;
     if (nbits_size > 5) nbits_size = 5;
-    max_per_thread = 1 << (18 - nbits_size);
+    max_per_thread = 1ull << (18 - nbits_size);
 
     uint32_t level = ((nbits64(nelem / max_per_thread)) * 3) / 2;
 
@@ -233,4 +238,8 @@ void parallel_sort<Block_size, Iter_t, Compare>
 };//    End namespace boost
 //****************************************************************************
 //
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif
