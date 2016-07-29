@@ -381,18 +381,18 @@ void merge_block<Iter_t, Compare, Power2>
     //                     Code
     //--------------------------------------------------------------------
     size_t pos_dest, pos_src, pos_ini;
-    size_t nelem = index.size();
+    size_t num_elem = index.size();
 
     ptr_circ->clear();
     value_t * aux = ptr_circ->get_buffer();
     range_buf rng_buf(aux, aux + ptr_circ->NMAX);
 
     pos_ini = 0;
-    while (pos_ini < nelem)
+    while (pos_ini < num_elem)
     {
-        while (pos_ini < nelem and index[pos_ini] == pos_ini)
+        while (pos_ini < num_elem and index[pos_ini] == pos_ini)
             ++pos_ini;
-        if (pos_ini == nelem) return;
+        if (pos_ini == num_elem) return;
         pos_dest = pos_src = pos_ini;
         rng_buf = move_forward(rng_buf, get_range(pos_ini));
         pos_src = index[pos_ini];

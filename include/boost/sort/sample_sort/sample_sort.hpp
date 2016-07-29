@@ -28,6 +28,11 @@
 #include <boost/sort/common/merge_vector.hpp>
 #include <boost/sort/common/range.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4706) // assignment within conditional expression
+#endif
+
 namespace boost
 {
 namespace sort
@@ -366,7 +371,7 @@ void sample_sort<Iter_t, Compare>::initial_configuration(void)
     //------------------------------------------------------------------------
     // Sorting of the ranges
     //------------------------------------------------------------------------
-    std::vector<std::future<void>> vfuture(nthread);
+    std::vector<std::future<void>> vecfuture(nthread);
 
     for (uint32_t i = 0; i < nthread; ++i)
     {
@@ -376,11 +381,11 @@ void sample_sort<Iter_t, Compare>::initial_configuration(void)
                             vmem_thread[i].last, comp,
                             vbuf_thread[i]);
         };
-        vfuture[i] = std::async(std::launch::async, func);
+        vecfuture[i] = std::async(std::launch::async, func);
     };
 
     for (uint32_t i = 0; i < nthread; ++i)
-        vfuture[i].get();
+        vecfuture[i].get();
 
     //------------------------------------------------------------------------
     // Obtain the vector of milestones
@@ -557,4 +562,8 @@ void sample_sort(Iter_t first, Iter_t last, Compare comp, uint32_t nthread)
 };//    End namespace boost
 //****************************************************************************
 //
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif
