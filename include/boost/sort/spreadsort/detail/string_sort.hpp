@@ -51,7 +51,7 @@ namespace spreadsort {
           //This will reduce the step_size if the current step doesn't match.
           if ((*curr).size() > char_offset) {
             if((*curr).size() <= (nextOffset + step_size)) {
-              step_size = (*curr).size() - nextOffset - 1;
+              step_size = static_cast<int>((*curr).size() - nextOffset - 1);
               if (step_size < 1) {
                 char_offset = nextOffset;
                 return;

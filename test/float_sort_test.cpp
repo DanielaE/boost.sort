@@ -83,19 +83,19 @@ void float_test()
 
   // Trying both positive and negative sorted and reverse sorted data.
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(-i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(-static_cast<float>(i));
   test_vector(base_vec, rightshift());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i - input_count);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<float>(i - input_count));
   test_vector(base_vec, rightshift());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(input_count - i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<float>(input_count - i));
   test_vector(base_vec, rightshift());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<float>(i));
   test_vector(base_vec, rightshift());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<float>(i));
   for (size_t i = 0; i < input_count; i += 2) base_vec[i] *= -1;
   test_vector(base_vec, rightshift());
 }
@@ -116,19 +116,19 @@ void double_test() {
 
   // Trying both positive and negative sorted and reverse sorted data.
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(-i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(-static_cast<double>(i));
   test_vector(base_vec, rightshift_64());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i - input_count);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<double>(i - input_count));
   test_vector(base_vec, rightshift_64());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(input_count - i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<double>(input_count - i));
   test_vector(base_vec, rightshift_64());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<double>(i));
   test_vector(base_vec, rightshift_64());
   base_vec.clear();
-  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(i);
+  for (size_t i = 0; i < input_count; ++i) base_vec.push_back(static_cast<double>(i));
   for (size_t i = 0; i < input_count; i += 2) base_vec[i] *= -1;
   test_vector(base_vec, rightshift_64());
 }

@@ -212,7 +212,7 @@ void size_bins_test() {
   const unsigned bin_count = 2;
   std::vector<int>::iterator *new_cache_start = 
     size_bins(bin_sizes, bin_cache, cache_offset, cache_end, bin_count);
-  BOOST_CHECK((new_cache_start - &bin_cache[0]) == cache_offset);
+  BOOST_CHECK(static_cast<unsigned>(new_cache_start - &bin_cache[0]) == cache_offset);
   BOOST_CHECK(bin_sizes[0] == 0);
   BOOST_CHECK(bin_sizes[1] == 0);
   BOOST_CHECK(bin_sizes[2] == 7);  // shouldn't modify past bin_count
