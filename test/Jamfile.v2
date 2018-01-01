@@ -10,6 +10,12 @@
 import ../../config/checks/config : requires ;
 import testing ;
 
+project
+    : requirements
+      # MSVC's warning STL4012: std::get_temporary_buffer() and std::return_temporary_buffer() are deprecated in C++17
+      <toolset>msvc:<define>_SILENCE_CXX17_TEMPORARY_BUFFER_DEPRECATION_WARNING
+    ;
+
 {
   test-suite "sort"
     : [ run integer_sort_test.cpp
